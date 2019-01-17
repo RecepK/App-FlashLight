@@ -3,6 +3,7 @@ package com.kurban.flashlight.components
 import android.content.Context
 import android.util.Log
 import android.widget.Toast
+import com.kurban.flashlight.R
 
 class LogHelper(private val context: Context) {
 
@@ -11,6 +12,6 @@ class LogHelper(private val context: Context) {
     }
 
     fun mLog(msg: String) {
-        Log.d("RKRK", msg)
+        Log.d(context.getString(R.string.app_name), msg)
     }
 }
