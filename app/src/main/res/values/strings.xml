@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">FlashLight</string>
+    <string name="opened">Açık</string>
+    <string name="closed">Kapalı</string>
+
+    <string name="open">Aç</string>
+    <string name="close">Kapat</string>
 </resources>

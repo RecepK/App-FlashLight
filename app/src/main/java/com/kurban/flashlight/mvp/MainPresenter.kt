@@ -4,10 +4,11 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.hardware.camera2.CameraManager
 import android.os.Build
-import android.widget.Toast
+import com.kurban.flashlight.components.LogHelper
+import com.kurban.flashlight.di.DependencyInjector
 import com.kurban.flashlight.ui.MainActivity
 
-class MainPresenter(private val view: MainContract.MvpView) : MainContract.Presenter {
+class MainPresenter(private val view: MainContract.MvpView, var dependencyInjector: DependencyInjector) : MainContract.Presenter {
 
     private lateinit var context: Context
     private var isTouchOn = false
@@ -15,8 +16,12 @@ class MainPresenter(private val view: MainContract.MvpView) : MainContract.Prese
     private lateinit var cameraManager: CameraManager
     private lateinit var cameraID: String
 
+    private lateinit var logHelper: LogHelper
+
     override fun init(): MainPresenter {
         context = view as MainActivity
+        logHelper = dependencyInjector.logHelper()
+
         context.packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH)
         cameraManager = context.getSystemService(Context.CAMERA_SERVICE) as CameraManager;
         cameraID = cameraManager.cameraIdList[0]
@@ -31,7 +36,7 @@ class MainPresenter(private val view: MainContract.MvpView) : MainContract.Prese
     }
 
     override fun toast(msg: String) {
-        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
+        logHelper.toast(msg)
     }
 
     override fun control(value: Boolean) {
