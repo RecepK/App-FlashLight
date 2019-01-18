@@ -25,14 +25,7 @@ class MainActivity : AppCompatActivity(), MainContract.MvpView {
     }
 
     override fun tik(value: Boolean) {
-        if (value) {
-            presenter.toast(getString(R.string.opened))
-            btn.text = getString(R.string.close)
-        } else {
-            presenter.toast(getString(R.string.closed))
-            btn.text = getString(R.string.open)
-        }
-        
+        if (value) presenter.toast(getString(R.string.opened)) else presenter.toast(getString(R.string.closed))
         presenter.control(value)
     }
 }
